@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Providers from "@/Providers";
+import Navbar from "@/components/NavBar";
+import Search from "@/components/Search";
+import StoreProvider from "@/store/StoreProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const mons = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "IMDB",
@@ -18,11 +21,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
+      <body className={mons.className}>
+        <StoreProvider>
+          <Providers>
+            <Header />
+            <Navbar />
+            <Search />
+            {children}
+          </Providers>
+        </StoreProvider>
       </body>
     </html>
   );
